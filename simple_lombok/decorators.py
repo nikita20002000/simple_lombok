@@ -51,37 +51,37 @@ def getter_and_setter(cls):
     >>> person.get_age()
     31
     """
-    # Сохраняем оригинальный __init__
+    # Save the original __init__
     original_init = cls.__init__
 
     def new_init(self, *args, **kwargs):
-        # Вызываем оригинальный __init__
+        # Call the original __init__
         original_init(self, *args, **kwargs)
 
-        # Создаем геттеры и сеттеры для всех атрибутов экземпляра
+        # Create getters and setters for all instance attributes
         for attr_name in self.__dict__:
-            if attr_name.startswith("__"):  # Пропускаем служебные атрибуты
+            if attr_name.startswith("__"):  # Skip special attributes
                 continue
 
-            # Создаем и привязываем геттер
+            # Create and bind getter
             def make_getter(attr):
                 def getter(self):
                     return getattr(self, attr)
                 return getter
 
-            # Создаем и привязываем сеттер
+            # Create and bind setter
             def make_setter(attr):
                 def setter(self, value):
                     setattr(self, attr, value)
                 return setter
 
-            # Добавляем методы к экземпляру, если они еще не существуют
+            # Add methods to the instance if they don't already exist
             if not hasattr(self, f'get_{attr_name}'):
                 setattr(self.__class__, f'get_{attr_name}', make_getter(attr_name))
             if not hasattr(self, f'set_{attr_name}'):
                 setattr(self.__class__, f'set_{attr_name}', make_setter(attr_name))
 
-    # Заменяем __init__ на новую версию
+    # Replace __init__ with our new version
     cls.__init__ = new_init
 
     return cls
@@ -121,24 +121,24 @@ def getter(cls):
     >>> person.get_age()
     30
     """
-    # Сохраняем оригинальный __init__
+    # Save the original __init__
     original_init = cls.__init__
 
     def new_init(self, *args, **kwargs):
         original_init(self, *args, **kwargs)
 
         for attr_name in self.__dict__:
-            if attr_name.startswith("__"):  # Пропускаем служебные атрибуты
+            if attr_name.startswith("__"):  # Skip special attributes
                 continue
 
-            # Создаем и привязываем геттер
+            # Create and bind getter
             def make_getter(attr):
                 def getter(self):
                     return getattr(self, attr)
 
                 return getter
 
-            # Добавляем методы к экземпляру, если они еще не существуют
+            # Add methods to the instance if they don't already exist
             if not hasattr(self, f'get_{attr_name}'):
                 setattr(self.__class__, f'get_{attr_name}', make_getter(attr_name))
 
@@ -183,24 +183,24 @@ def setter(cls):
     >>> person.age
     25
     """
-    # Сохраняем оригинальный __init__
+    # Save the original __init__
     original_init = cls.__init__
 
     def new_init(self, *args, **kwargs):
         original_init(self, *args, **kwargs)
 
         for attr_name in self.__dict__:
-            if attr_name.startswith("__"):  # Пропускаем служебные атрибуты
+            if attr_name.startswith("__"):  # Skip special attributes
                 continue
 
-            # Создаем и привязываем геттер
+            # Create and bind setter
             def make_setter(attr):
                 def setter(self, value):
                     setattr(self, attr, value)
 
                 return setter
 
-            # Добавляем методы к экземпляру, если они еще не существуют
+            # Add methods to the instance if they don't already exist
             if not hasattr(self, f'set_{attr_name}'):
                 setattr(self.__class__, f'set_{attr_name}', make_setter(attr_name))
 

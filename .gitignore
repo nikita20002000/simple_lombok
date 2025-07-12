@@ -1,2 +1,6 @@
+# Env files
 .idea
 .venv
+
+# Local files
+todo.txt

@@ -2,9 +2,31 @@
 SimpleLombok - A Python library inspired by Java's Lombok.
 
 This library provides decorators and utilities to reduce boilerplate code in Python classes.
-It includes functionality for automatically generating getters, setters, constructors,
-equality methods, string representations, and more.
+It includes functionality for automatically generating getters, setters, constructors, equality methods, string representations, and more.
+
+Modules:
+- `decorators`: Implements getter and setter decorators.
+- `data_class`: Provides enhanced dataclass-like functionality.
+- `constructor`: Includes utilities for generating constructors.
+- `validation`: Offers field validation mechanisms.
+- `immutable`: Enables immutable class creation.
+- `logger`: Provides a simple logger for custom output
+
+Usage Example:
+    from simple_lombok import getter_and_setter
+
+    @getter_and_setter
+    class Person:
+        def __init__(self, name, age):
+            self.name = name
+            self.age = age
+
+    person = Person("John", 30)
+    print(person.get_name())  # John
+    person.set_age(35)
+    print(person.get_age())  # 35
 """
+
 
 # Import decorators for getters and setters
 from simple_lombok.decorators import getter, setter, getter_and_setter
