@@ -4,3 +4,10 @@
 
 # Local files
 todo.txt
+main.py
+
+# Build & dist
+build/
+dist/
+
+
